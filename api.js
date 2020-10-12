@@ -1,11 +1,10 @@
 // This file will be used to route all the requests 
 const express = require('express');
-const  mongoose  = require('mongoose');
-const { findOne } = require('./models/user');
+const mongoose  = require('mongoose');
 const User = require('./models/user');
 const router = express.Router();
 // web token dependency
-const jwt = require('jasonwebtoken');
+const jwt = require('jsonwebtoken');
 
 const uri = "mongodb+srv://user1:Y6RHjust7IUxw1oE@metadata.s6ori.mongodb.net/DataClassification?retryWrites=true&w=majority";
 
