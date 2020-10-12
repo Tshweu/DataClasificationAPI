@@ -6,5 +6,5 @@ const userSchema = new Schema({
     email: String,
     password: String
 })
-
+//maps it to users collection
 module.exports = mongoose.model('user',userSchema,'users');

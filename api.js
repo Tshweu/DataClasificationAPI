@@ -8,7 +8,7 @@ const uri = "mongodb+srv://user1:Y6RHjust7IUxw1oE@metadata.s6ori.mongodb.net/Dat
 
 const options = {
     useNewUrlParser: true ,
-    useUnifiedTopology: true 
+    useUnifiedTopology: true// Keep trying to send operations for 5 seconds 
 }
 
 mongoose.connect(uri, options ,(err)=>{
