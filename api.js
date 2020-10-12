@@ -6,7 +6,12 @@ const router = express.Router();
 
 const uri = "mongodb+srv://user1:Y6RHjust7IUxw1oE@metadata.s6ori.mongodb.net/DataClassification?retryWrites=true&w=majority";
 
-mongoose.connect(uri,{ useNewUrlParser: true } ,(err)=>{
+const options = {
+    useNewUrlParser: true ,
+    useUnifiedTopology: true 
+}
+
+mongoose.connect(uri, options ,(err)=>{
     if(err){
         console.error("Database connection error : ",err);
     }else{
