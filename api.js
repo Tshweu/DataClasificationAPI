@@ -1,6 +1,7 @@
 // This file will be used to route all the requests 
 const express = require('express');
 const  mongoose  = require('mongoose');
+const { findOne } = require('./models/user');
 const User = require('./models/user');
 const router = express.Router();
 
@@ -31,6 +32,29 @@ router.post('/register',(req,res)=>{
             console.error("ERROR, Failed to save user : ",err);
         }else{
             res.status(200).send(registeredUser);
+        }
+    })
+})
+
+router.post('/login',(req,res)=>{
+    let userData = req.body;
+
+    User.findOne({email: userData.email}, (err,user)=>{
+        //check if theres a error
+        if(err){
+            console.error("User login err :",err);
+        } else{
+            //if no error check if user exists
+            if(!user){
+                res.status(401).send('Invalid Email')
+            }else{
+                // checks if password matches
+                if(user.password != userData.password){
+                    res.status(401).send("Invalid Password");
+                }else{ 
+                    res.status(200).send(user);
+                }
+            }
         }
     })
 })
