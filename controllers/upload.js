@@ -26,7 +26,7 @@ router.get('/', function (req, res) {
 });
 
 // POST File
-router.post('/',upload.single('file'),function (req, res) {
+router.post('/excel',upload.single('file'),function (req, res) {
     console.log(fileName);
   if (!req.file) {
     console.log("No file is available!");
@@ -36,8 +36,40 @@ router.post('/',upload.single('file'),function (req, res) {
 
   } else {
     console.log('File is available!');
-    return res.json(readExcel.getSheetList(`./uploads/`+fileName));
+
+    let sheets_and_filename = {
+      sheets: [],
+      filename: String
+    }
+
+    sheets_and_filename.sheets = readExcel.getSheetList(`./uploads/`+fileName);
+    sheets_and_filename.filename = fileName;
+    return res.json(sheets_and_filename);
   }
 });
 
+//Post Textfile
+
+//post word
+router.post('/excel',upload.single('file'),function (req, res) {
+    console.log(fileName);
+  if (!req.file) {
+    console.log("No file is available!");
+    return res.send({
+      success: false
+    });
+
+  } else {
+    console.log('File is available!');
+
+    let sheets_and_filename = {
+      sheets: [],
+      filename: String
+    }
+
+    sheets_and_filename.sheets = readExcel.getSheetList(`./uploads/`+fileName);
+    sheets_and_filename.filename = fileName;
+    return res.json(sheets_and_filename);
+  }
+});
 module.exports = router;
