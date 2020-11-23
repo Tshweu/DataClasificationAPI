@@ -2,6 +2,8 @@
 const express = require('express');
 const mongoose  = require('mongoose');
 const User = require('./models/user');
+const upload = require('./controllers/upload');
+const saveMeta = require('./controllers/update');
 const router = express.Router();
 // web token dependency
 const jwt = require('jsonwebtoken');
@@ -12,6 +14,9 @@ const options = {
     useNewUrlParser: true ,
     useUnifiedTopology: true// Keep trying to send operations for 5 seconds 
 }
+
+router.use('/upload',upload);
+router.use('/saveMeta',saveMeta);
 
 mongoose.connect(uri, options ,(err)=>{
     if(err){
