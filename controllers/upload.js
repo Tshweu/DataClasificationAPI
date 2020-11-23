@@ -4,6 +4,7 @@ const multer = require('multer');
 const readExcel = require('../controllers/readExcelFile');
 const classify = require('./classify');
 const fs = require('fs');
+const { verifyToken } = require('./verify');
 
 // File upload settings  
 const PATH = './uploads';
@@ -28,7 +29,7 @@ router.get('/', function (req, res) {
 });
 
 // POST Excel File
-router.post('/excel',upload.single('file'),function (req, res) {
+router.post('/excel',verifyToken,upload.single('file'),function (req, res) {
     console.log(fileName);
   if (!req.file) {
     console.log("No file is available!");
@@ -51,14 +52,14 @@ router.post('/excel',upload.single('file'),function (req, res) {
 });
 //recieves sheet and filename 
 //reads data from the specified sheet
-router.post('/excelSheet',(req,res)=>{
+router.post('/excelSheet',verifyToken,(req,res)=>{
   let filename = req.body.filename;
   let sheet = req.body.sheet;
   res.json(classify.ExcelClassification(readExcel.readFileData(sheet)));
 })
 
 //Post Textfile
-router.post('/txt',upload.single('file'),function (req, res) {
+router.post('/txt',verifyToken,upload.single('file'),function (req, res) {
   console.log(fileName);
   if (!req.file) {
     console.log("No file is available!");

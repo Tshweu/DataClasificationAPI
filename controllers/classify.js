@@ -44,18 +44,20 @@ var ExcelClassification= (meta)=>{
     Data.forEach(data=>{ 
         console.log(data);
         let classification = false;
-         basic_terms.forEach(element => {
-                 //search all data for matching 
-                 //console.log(element);
-                 str1 = `${element}`
-                 var re = new RegExp(str1, "i");
-                 //regex = / {element} /i;
-                 if(data.match(re)){
-                     classification=true;
-                 }     
-         })
-         if(Data[i]!='')
-         fields.push({field_name: `${Data[i]}`,classified:classification})
+        for(var field in data){
+            basic_terms.forEach(element => {
+                    //search all data for matching 
+                    //console.log(element);
+                    str1 = `${element}`
+                    var re = new RegExp(str1, "i");
+                    //regex = / {element} /i;
+                    if(field.match(re)){
+                        classification=true;
+                    }     
+            })
+        }
+         //if(Data[i]!='')
+         fields.push({field_name: `${data.Name}`,classified:classification})
     })
    
     return fields;

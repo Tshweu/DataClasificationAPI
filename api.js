@@ -15,11 +15,11 @@ const options = {
     useUnifiedTopology: true// Keep trying to send operations for 5 seconds 
 }
 
+// router.use('/upload',upload);
+// router.use('/saveMeta',saveMeta);
+
 router.use('/upload',upload);
 router.use('/saveMeta',saveMeta);
-
-// router.use('/upload',verifyToken,upload);
-// router.use('/saveMeta',verifyToken,saveMeta);
 
 mongoose.connect(uri, options ,(err)=>{
     if(err){
@@ -29,28 +29,7 @@ mongoose.connect(uri, options ,(err)=>{
     }
 })
 
-function verifyToken(req,res,next){
-    //check if authorization exists
-    if(!req.body.authorization){
-        return res.status(401).send('Unauthorized request');
-    }else{
-        //split where there is a space and take token
-        //@ index 1
-        let token = req.headers.authorization.split(' ')[1]; 
-        //check if token is null
-        if(token === 'null'){
-            return res.status(401).send('Unauthorized request');
-        } else{
-            let payload = jwt.verify(token, 'keyAuth');
-            //checks if valid token
-            if(!payload){
-                return res.status(401).send('Unauthorized request');
-            }
-            req.userId = payload.subject;
-            next();
-        }
-    }
-}
+
 // router.get('/',verifyToken,(req,res)){
 //     ...add code
 // }
