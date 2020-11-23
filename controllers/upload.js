@@ -54,7 +54,7 @@ router.post('/excel',upload.single('file'),function (req, res) {
 router.post('/excelSheet',(req,res)=>{
   let filename = req.body.filename;
   let sheet = req.body.sheet;
-  res.json(readExcel.readFileData(sheet));
+  res.json(classify.ExcelClassification(readExcel.readFileData(sheet)));
 })
 
 //Post Textfile

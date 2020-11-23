@@ -34,4 +34,32 @@ var textClassification= (meta)=>{
    //console.log(Data); 
 }
 
-module.exports = {textClassification};
+/////////////////////
+var ExcelClassification= (meta)=>{
+    let Data = meta;
+    let results = [];
+    let regex = /base/;
+    console.log(Data);
+     //console.log(Data);
+    Data.forEach(data=>{ 
+        console.log(data);
+        let classification = false;
+         basic_terms.forEach(element => {
+                 //search all data for matching 
+                 //console.log(element);
+                 str1 = `${element}`
+                 var re = new RegExp(str1, "i");
+                 //regex = / {element} /i;
+                 if(data.match(re)){
+                     classification=true;
+                 }     
+         })
+         if(Data[i]!='')
+         fields.push({field_name: `${Data[i]}`,classified:classification})
+    })
+   
+    return fields;
+    //console.log(Data); 
+ }
+
+module.exports = {textClassification,ExcelClassification};
