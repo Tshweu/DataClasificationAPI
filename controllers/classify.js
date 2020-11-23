@@ -4,12 +4,13 @@ const router = express.Router();
 const basic_terms = ['Name','surname','fullname','lastname','firstname','middlename',
                         'Age','DOB','Date of birth','Date','ID','Identification',
                         'Address','Street']
-var fields=[];
+//var fields=[];
 // [{field_name: String,classified: Boolean}];
 
 var textClassification= (meta)=>{
+
    let Data = meta.split(/\r|:/);
-   //let fields = [];
+   let fields = [];
    let results = [];
    let regex = /base/;
    console.log(Data);
@@ -38,6 +39,7 @@ var textClassification= (meta)=>{
 var ExcelClassification= (meta)=>{
     let Data = meta;
     let results = [];
+    let fields=[];
     let regex = /base/;
     console.log(Data);
      //console.log(Data);
