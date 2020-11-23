@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const readExcel = require('../controllers/readExcelFile');
+const classify = require('./classify');
 const fs = require('fs');
 
 // File upload settings  
@@ -72,7 +73,7 @@ router.post('/txt',upload.single('file'),function (req, res) {
           throw error;
       }
       let data_json = data.toString();
-      res.json(data_json);
+      res.json(classify.textClassification(data_json));
       //console.log(data.toString());
     });
   }

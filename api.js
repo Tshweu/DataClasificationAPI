@@ -18,6 +18,9 @@ const options = {
 router.use('/upload',upload);
 router.use('/saveMeta',saveMeta);
 
+// router.use('/upload',verifyToken,upload);
+// router.use('/saveMeta',verifyToken,saveMeta);
+
 mongoose.connect(uri, options ,(err)=>{
     if(err){
         console.error("Database connection error : ",err);
